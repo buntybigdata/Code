@@ -1,1 +1,16 @@
+### Below are all the sqoop list commands example#####
+1)To list all the database following command can be use:-
 
+sqoop list-databases \
+--connect jdbc:mysql://localhost  \
+--username root  \
+--password cloudera \
+
+2)To list all the tables in a given database
+
+sqoop list-tables \
+--connect jdbc:mysql://localhost/retail_db \
+--username root  \
+--password cloudera \
+
+##retail_db is the name of the database whose tables you want to list.
