@@ -1,0 +1,152 @@
+###Sqoop import is the main command in sqoop.This command is used to transfer data from RDBMS to HDFS.###
+
+Basic import command:
+
+sqoop import \
+  --connect "jdbc:mysql://localhost/retail_db" \
+  --username root \
+  --password cloudera \
+  --table departments \
+  --as-textfile \
+  --target-dir /user/cloudera/departments
+  
+  import command for transferring all the tables in a databases:-
+  
+sqoop import-all-tables \
+   --connect jdbc:mysql://localhost/retail_db \
+   --username root \
+   --password cloudera \
+   --warehouse-dir /user/hive/warehouse/retail_stage.db
+   
+   import command to store the data in avroformat:-
+   
+ sqoop import \
+  --connect "jdbc:mysql://localhost/retail_db" \
+  --username root \
+  --password cloudera \
+  --table departments \
+  --as-avrodatafile \
+  --target-dir /user/cloudera/departments
+  
+  import command to store the data in sequencefile format:-
+  
+  sqoop import \
+  --connect "jdbc:mysql://localhost/retail_db" \
+  --username root \
+  --password cloudera \
+  --table departments \
+  --as-sequencefile \
+  --target-dir /user/cloudera/departments
+  
+  Import command where number of mappers are 12 instead of default 4
+  
+  sqoop import \
+  --connect "jdbc:mysql://localhost/retail_db" \
+  --username root \
+  --password cloudera \
+  --table departments \
+  --as-avrodatafile \
+  --num-mappers 12 \
+  --target-dir /user/cloudera/departments
+  
+  Import command to transfer the data from rdbms to hive directly alonside creation of table and also compression using snappy
+  compression algorithm:
+  sqoop import \
+  --connect jdbc:mysql://localhost/retail_db \
+  --username root \
+  --password cloudera \
+  --table departments \
+  --import-hive \
+  --create-hive-tables \
+  --hive-overwrite \
+  --compress \
+  --compression-codec org.apache.hadoop.io.compress.SnappyCodec \
+  --outdir java_files
+  
+  sqoop import using boundary value query:-
+  
+  Sqoop import –connect jdbc:mysql://localhost/retail_db \
+  -- table departments
+  --username root
+  --password cloudera
+  --target-dir /user/cloudera/example
+  --m 2
+  --boundary-query “ select min(department_id) , max(department_id) from departments where department_id <>8000
+  
+  Sqoop import command to transfer only some columns not full table:-
+  
+  sqoop import \
+  --connect jdbc:mysql://localhost/retail_db \
+  --username root \
+  --password cloudera \
+  --table products \
+  --columns product_name , product_id
+  
+  Sqoop import command using split-by:-
+  
+   Sqoop import –connect jdbc:mysql://localhost/retail_db \
+        -- table departments_noprimarykey \
+        --username root \
+        --password cloudera \
+        --target-dir /user/cloudera/example\
+        --m 4 \
+        --split-by department_id
+        
+  Where clause in sqoop import command:
+  
+  sqoop import \
+  --connect jdbc:mysql://quickstart.cloudera:3306/retail_db  \
+  --username retail_dba \
+  --password cloudera \
+  --table departments \
+  --target-dir /user/hive/warehouse/retail_ods.db/departments \
+  --append \
+  --fields-terminated-by '|' \
+  --lines-terminated-by '\n' \
+  --split-by department_id \
+  --where "department_id > 7" \
+  --outdir java_files
+  
+  Icremental import in sqoop import command:
+  
+  sqoop import \
+  --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+  --username root \
+  --password cloudera \
+  --table departments \
+  --target-dir /user/hive/warehouse/retail_ods.db/departments \
+  --append \
+  --fields-terminated-by '|' \
+  --lines-terminated-by '\n' \
+  --incremental append \
+  --check-column "department_id" \
+  --last-value 7 \
+  --outdir java_files
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+   
