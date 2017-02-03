@@ -1,0 +1,56 @@
+###The merge tool allows you to combine two datasets where entries in one dataset should overwrite entries of an older dataset.
+
+1)Create a new directory:-
+
+hdfs dfs -mkdir /user/cloudera/sqoop_merge
+
+2)import command to load the data :-
+
+sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username root \
+  --password cloudera \
+  --table departments \
+  --target-dir /user/cloudera/sqoop_merge/departments
+
+3)Update a record in the departments table:-
+
+ sqoop eval --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username root \
+  --password cloudera \
+  --query "update departments set department_name='Testing Merge' where department_id = 7"
+  
+ 4)Now insert a new record in the departments table:-
+ 
+   sqoop eval --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username retail_dba \
+  --password cloudera \
+  --query "insert into departments values (10000, 'Inserting for merge')"
+
+
+5)Now we will make a new load  again:-
+
+  sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username root \
+  --password cloudera \
+  --table departments \
+  --as-textfile \
+  --target-dir /user/cloudera/sqoop_merge/departments_delta \
+  --where "department_id >= 8000"
+  
+6)Now we run the merge command:-
+
+  sqoop merge --merge-key department_id \
+  --new-data /user/cloudera/sqoop_merge/departments_delta \
+  --onto /user/cloudera/sqoop_merge/departments \
+  --target-dir /user/cloudera/sqoop_merge/departments_stage \
+  --class-name departments \
+  --jar-file  /tmp/sqoop-cloudera/compile/6796b519d8e808eb10d73a0cab5aebac/departments.jar
+
+a)new-data parameter is describing the new  table path
+b)onto parameter is describing the old table path
+c)target-dir is describing the path where we want to store our newly generated table.
+d) /tmp/sqoop-cloudera/compile/6796b519d8e808eb10d73a0cab5aebac/departments.jar this jar file you can find from the previous 
+import command details.
+
