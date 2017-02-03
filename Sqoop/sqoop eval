@@ -1,0 +1,17 @@
+### Some examples of sqoop eval command ###
+
+=>It allows users to execute user-defined queries against respective database servers and preview the result in the console
+
+sqoop eval \
+--connect jdbc:mysql://localhost/retail_db \
+--username root \
+--password cloudera \
+--query "Select * from deparatments" 
+
+sqoop eval \
+--connect jdbc:mysql://localhost/retail_db \
+--username root \
+--password cloudera \
+--query "Insert INTO departments VALUES(1 , "John" , 20000)" 
+
+
