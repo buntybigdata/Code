@@ -1,0 +1,36 @@
+#####The job tool allows you to create and work with saved jobs. Saved jobs remember the parameters used to specify a job, so they 
+can be re-executed by invoking the job by its handle.
+
+1)Create a new job:-
+
+sqoop job --create sqoop_job \
+  --  import \
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username=retail_dba \
+  --password=cloudera \
+  --table departments \
+  --target-dir /user/hive/warehouse/retail_ods.db/departments \
+  --append \
+  --fields-terminated-by '|' \
+  --lines-terminated-by '\n' \
+  --check-column "department_id" \
+  --incremental append \
+  --last-value 7 \
+
+Please not that there must be space between -- and import in the above command.
+
+#####If you want to check the available sqoop jobs , below is the command  for  that:
+
+      Sqoop job  - - list
+      
+#####And if you want to see the details about any sqoop job , below is the command for that:
+
+sqoop job –show  sqoop_job
+
+#####And if you want to execute the sqoop job following below the command:
+
+sqoop job --exec sqoop_job
+#####If you want to delete a job , below is the command for the same:-
+
+Sqoop job - -  delete sqoop_job
+
