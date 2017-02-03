@@ -1,0 +1,49 @@
+###########Sqoop delimiters commands. Commands to change the delimiter of the data
+
+1)enclosed-by parameter
+
+sqoop import \
+ --connect jdbc:mysql://localhost/retail_db \
+ --username root \
+ --password cloudera \
+ --table departments \
+ --target-dir /user/cloudera/sqoop_import/delimiter \
+ --enclosed-by " 
+ 
+ ####fields-terminated-by and lines-terminated-by parameters  :-
+ 
+ Sqoop import  \
+--connect jdbc:mysql://localhost/retail_db  \
+--username retail_dba  \
+--password cloudera  \
+--table departments  \
+--target-dir  /user/cloudera/sqoop_import/departments_enclosedby  \
+--enclosed-by “  \
+--fields-terminated-by  \
+--lines_terminated-by
+
+
+##sqoop export delimiters:
+
+sqoop export 
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username root \
+  --password cloudera \
+  --table departments_test \
+  --export-dir /user/hive/warehouse/departments_test \
+  --input-fields-terminated-by '\001' \
+  --input-lines-terminated-by '\n' \
+  --num-mappers 2 \
+  --batch \
+  --outdir java_files \
+  --input-null-string nvl \
+  --input-null-non-string  -1
+  
+  
+  
+  
+  
+
+  
+  
+
