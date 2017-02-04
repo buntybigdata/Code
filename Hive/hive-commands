@@ -1,7 +1,7 @@
 ##To connect to hive type hive in the terminal
 $ hive
 
-## To ecit from hive terminal type:
+## To exit from hive terminal type:
 exit;
 
 ###Creating the databases:
