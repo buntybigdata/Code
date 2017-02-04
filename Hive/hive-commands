@@ -1,1 +1,261 @@
+##To connect to hive type hive in the terminal
+$ hive
+
+## To ecit from hive terminal type:
+exit;
+
+###Creating the databases:
+
+create database cards;
+
+###Using the database:
+
+use cards;
+
+###Creating the tables in hive:-
+
+CREATE TABLE deck_of_cards(color string , suit string , pip string) 
+ROW FORMAT DELIMITED 
+FILEDS TERMINATED BY  ‘|’
+STORED AS TEXTFILE;
+
+###To see the table details:
+
+Describe deck_of_cards;
+
+###For more details about the table deck_of_cards:
+
+Describe formatted deck_of_cards;
+
+###Command to load the data in hive table from local:-
+
+LOAD DATA LOCAL INPATH  ‘/home/cloudera/data/cards/deckofcards.txt ‘ INTO TABLE deck_of_cards;
+
+###Creating an external table in hive:-
+
+CREATE  EXTERNAL TABLE deck_of_cards(color string , suit string , pip string) 
+ROW FORMAT DELIMITED 
+FILEDS TERMINATED BY  ‘|’
+STORED AS TEXTFILE;
+LOCATION  ‘/user/hive/warehouse/cards.db/deck_of_cards’;
+
+##################  DEMO ON HIVE ##########################################
+
+Create a database: create database retail_ods;
+Use database: use retail_ods;
+Now we will create some tables for the demonstration:
+1)Categories
+CREATE TABLE categories (
+category_id int,
+category_department_id int,
+category_name string
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE ;
+
+2)customers
+CREATE TABLE customers (
+customer_id       int,
+customer_fname    string,
+customer_lname    string,
+customer_email    string,
+customer_password string,
+customer_street   string,
+customer_city     string,
+customer_state    string,
+customer_zipcode  string 
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+3.)departments
+CREATE TABLE departments (
+department_id int,
+department_name string
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+
+
+
+4)orders
+CREATE TABLE orders (
+order_id int,
+order_date string,
+order_customer_id int,
+order_status string
+)
+PARTITIONED BY (order_month string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+5)order_items
+CREATE TABLE order_items (
+order_item_id int,
+order_item_order_id int,
+order_item_order_date string,
+order_item_product_id int,
+order_item_quantity smallint,
+order_item_subtotal float,
+order_item_product_price float
+)
+PARTITIONED BY (order_month string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+
+
+6)orders_bucket
+CREATE TABLE orders_bucket (
+order_id int,
+order_date string,
+order_customer_id int,
+order_status string
+)
+CLUSTERED BY (order_id) INTO 16 BUCKETS
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+7)order_items_bucket
+CREATE TABLE order_items_bucket (
+order_item_id int,
+order_item_order_id int,
+order_item_order_date string,
+order_item_product_id int,
+order_item_quantity smallint,
+order_item_subtotal float,
+order_item_product_price float
+)
+CLUSTERED BY (order_item_order_id) INTO 16 BUCKETS
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+
+8)Products
+CREATE TABLE products (
+product_id int, 
+product_category_id int,
+product_name string,
+product_description string,
+product_price float,
+product_image string
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+Now lets us create some tables in retail_edw database:-
+So first use the database as : use retail_edw;
+1)products_dimension
+CREATE TABLE products_dimension (
+product_id int,
+product_name string,
+product_description string,
+product_price float,
+product_category_name string,
+product_department_name string
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+2)order_fact
+CREATE TABLE order_fact (
+order_item_order_id int,
+order_item_order_date string,
+order_item_product_id int,
+order_item_quantity smallint,
+order_item_subtotal float,
+order_item_product_price float
+)
+PARTITIONED BY (product_category_department string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+
+###Importing the data in the table departments using sqoop
+
+sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username=retail_dba \
+  --password=cloudera \
+  --table departments \
+  --target-dir /user/hive/warehouse/retail_ods.db/departments \
+  --append \
+  --fields-terminated-by '|' \
+  --lines-terminated-by '\n' \
+  --num-mappers 1
+  --outdir java_files
+  
+#####Partitioning and Bucketng code#########
+
+create table txnrecsByCat(txnno INT, txndate STRING, custno INT, amount DOUBLE,
+product STRING, city STRING, state STRING, spendby STRING)
+partitioned by (category STRING)
+clustered by (state) INTO 10 buckets
+row format delimited
+fields terminated by ‘,’
+stored as textfile;
+
+####To enable the partition in hive######
+
+set hive.exec.dynamic.partition.mode=nonstrict;
+set hive.exec.dynamic.partition=true;
+set hive.enforce.bucketing=true;
+
+#####Command to querying on a particular table####
+
+SELECT txnno,product,state 
+FROM txnrecsbycat TABLESAMPLE(BUCKET 3 OUT OF 10);
+
+####Joins in Hive######
+
+First create employee table as follows and load the file from local into the hive table created as:-
+
+create table employee(name STRING , salary INT, location STRING)
+> row format delimited
+> fields terminated by ‘,’ ;
+
+Now load the data:- load data local inpath ‘/home/cloudera/emp.txt’ into table employee;
+
+Second create an email table as follows with two colums one is name and second is email:-
+
+create table email(name STRING ,email STRING)
+> row format delimited
+> fields terminated by ‘,’;
+
+Now load the data:-load data local inpath ‘/home/cloudera/email.txt’ into table email;
+
+Now we got two tables in our default hive directory.Now we will perform join on these two tables as :-
+
+  select a.name,a.salary,a.location,b.email from
+> employee a join email b on a.name=b.name;
+
+There are different types of join like left outer join, right outer join among others.
+
+Left outer Join:-
+
+select a.name,a.salary,a.location,b.email from
+employee a left outer join email b on a.name=b.name;
+
+Full Outer Join:-
+
+select a.name,a.salary,a.location,b.email from
+employee a full outer join email b on a.name=b.name;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
