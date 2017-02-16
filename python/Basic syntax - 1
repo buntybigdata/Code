@@ -1,0 +1,77 @@
+#Basic if else
+
+var = 100
+if(var == 100):
+  print ('The value is 100')
+  print ('Gppd Bye')
+  
+## Loops in python
+
+#1)while loop:
+
+a = 0
+while(a<10):
+  print ("The value is : " , a)
+  a = a +1
+print ('Good Bye')
+
+#2)For loop
+
+#example 1
+
+for i in 'Python':
+  print (i)
+  
+#Example 2
+
+for num in range(1,20):
+  print (num)
+  
+#Example 3:
+
+fruits = ['mango' , 'Banana' , 'Apple']
+for fruit in fruits:
+  print ('current fruit : ' , fruit)
+
+print ("Good Bye!")
+
+#Example 4 : Iterating by sequence indexfruits 
+
+fruits = ['mango' , 'Banana'  , 'Apple']
+for index in range(len(fruits)):
+  print ('current fruit : ' , fruits[index])
+print ('good bye')
+
+#Example 5 : break statement
+
+var = 'python'
+for i in var:
+  if (i=='h'):
+    break
+  print (i)
+  
+
+###Mathematical functions
+
+#a) abs()   =>The method abs() returns absolute value of x - the (positive) distance between x and zero.
+
+a = abs(-45)
+print (a)
+#This will give you 45
+
+b = abs(119.2)
+print (b)
+#This will give you 119.2
+
+#b) ceil()      =>The method ceil() returns ceiling value of x - the smallest integer not less than x.
+
+import math
+print (math.ceil(45.3))
+#This will print 46.0
+
+#c)  cmp(x,y)     =>The method cmp() returns the sign of the difference of two numbers : -1 if x < y, 0 if x == y, or 1 if x > y 
+
+print "cmp(80, 100) : ", cmp(80, 100)      #returns -1
+print "cmp(180, 100) : ", cmp(180, 100)    #returns 1
+print "cmp(20,20) : " , cmp(20,20)         #returns 20
+
