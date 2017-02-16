@@ -1,1 +1,81 @@
+print ("Hello,Python!")
+a = 10
+print (a)
+b = 44.6
+print (b)
+# This is a comment
+counter = 10
+counters = 10.25
+counterstring = "This is good"
+print (counter)
+print (counters)
+print (counterstring)
+#Python has five standard data types which are Numbers , String , List , Tuple , Dictionary
+lo = 15651231563165
+print (lo)
+# Lets talk about python Numbers
 
+Ints  = 22
+Longsss = 51586321165322
+floa = 25.51
+comp = 2 + 5j
+print(Ints)
+print(Longsss)
+print(floa)
+print(comp)
+#Now let us talk about the Strings in python
+
+str = 'Hello python'
+print (str)    # This will print full string
+print (str[2:])   # This will print a substring starting from third letter
+print (str[2:5])  # This will  print the substring starting from 3 to 4 last will be excluded
+print (str[2])    # This will prin the third letter in the string
+print (str * 2)   # This will print the string two times
+print (str + 'I am good')   # This will cancate the string.
+
+# Let us talk about List in python
+
+list = [1 , 'Max' , 22000 , 5.7 , 'Male']
+tinylist = [2 , 'John']
+
+print (list)  # This will print the whole list
+print (list[1]) # This will print the second element from the list
+print (list[2:]) # This will print the list starting from the third element
+print (list[2:4]) # This will print the list starting from third element till 4th
+print (list * 2)  # This will print the list two times
+print (list + tinylist) # This will concate the list and tinylist
+
+#Let us talk about the python tuples.tuples are same as list only tuples are enclosed in paranthesis and cannot be updated.Tuples can be thought as read only lists.
+
+tuple = ( 1, 'Bunty' , 33.55 , 'Hadoop' , 44)
+tinytuple = (4 , ' Big data')
+
+print (tuple)  # This will print the full tuple
+print (tuple[2]) # this will print the third element from the tuple
+print (tuple[2:]) # This will print the tuple from the third element
+print (tuple[2:4]) # This will print the tuple from third till fourth
+print (tuple * 2) # This will print the tuple two times
+print (tuple + tinytuple) # This will concate the two tuples.
+
+#Let us talk about python Dictionary 
+
+dict = {'name' : 'Walt' , 'code' : 1234 , 'dept' : 'sales'}
+
+print (dict)       # This will print the whole Dictionary
+print (dict.keys())  # This will print only keys
+print (dict.values())  # This will print only values 
+
+#Operators in python
+
+add  = 5 + 4   # Addition
+print (add)
+sub = 6-3   # Subtraction
+print (sub)
+mul = 5*4  # Multiplication
+print(mul)
+div = 66/3  # division
+print (div)
+mod = 5%2   # Modulus
+print (mod)
+exp = 2**3  # Power
+print (exp)
