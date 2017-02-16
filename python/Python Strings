@@ -1,0 +1,98 @@
+###Python Strings#####
+
+#Strings are simply the most popular types in Python.We can simply create them by closing them in single or double quotes.
+
+str1 = 'Hello world'
+str2 = "Hello Python"
+
+#Python does not support a character type; these are treated as strings of length one, thus also considered a substring.
+
+print (str1)
+print (str2)
+
+#String formating operator:-One of Python's coolest features is the string format operator %.
+
+# print ('my name is %s and my hieght is %d inches') % ('Bunty' , 6)
+
+##Multiline strings can be written in triple quotes:
+
+multistr = """Google is an American multinational technology company specializing in Internet-related services and products that 
+include online advertising technologies, search, cloud computing, software, and hardware."""
+
+print (multistr)
+
+####Python string funtions#####################
+
+#1)capitalize()   =>It returns a copy of the string with only its first character capitalized.
+
+strs = 'this is python'
+print (strs.capitalize())
+
+#2)count(sub , start = 0 , end = length(string)))  =>The method count() returns the number of occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.
+
+string = 'This is google and its a technology company'
+
+sub = 'i'
+print (string.count(sub , 0 , 40))
+
+#3)find()  =>It determines if string str occurs in string, or in a substring of string if starting index beg and ending index end are given.
+
+str = 'That interview was very difficult'
+str1 = 'dif'
+print (str.find(str1))
+print (str.find(str1 , 0 , 20))
+
+print (str.isdigit())    # will return false because str has no digits
+
+strings = '123455'
+print (strings.isdigit())    # will return true becuase it has only digits
+str = "THIS is string example....wow!!!"; 
+print (str.islower())
+
+str = "this is string example....wow!!!";
+print (str.islower())
+
+#4) join()  =>The method join() returns a string in which the string elements of sequence have been joined by str separator.
+
+str = '-'
+sequence = ("This" , "is" , "Python")
+print (str.join(sequence))
+
+# Above command will return This-is-python
+
+#5)len()  => This method will return the length of the string
+
+string = 'This is my strings'
+print ('The length of the string is : ' , len(string))
+
+#6) lower() => This method will return the string in lower case letter
+
+string = 'CONVERT THIS STRING INTO LOWER CASE'
+
+print ('String in lower case : ' , string.lower())
+
+#7)max()  =>  The method max() returns the max alphabetical character from the string str.
+
+string = 'Yes really python is good and m gonna master in it'
+print (max(string))
+
+#8)min()  => Returns the min alphabetical character from the string str.
+
+sting = 'absjasjkaskjakjs'
+print (min(sting))
+
+#9)replace(old , new ,[max])  => The method replace() returns a copy of the string in which the occurrences of old have been replaced with new, optionally restricting the number of replacements to max.
+
+str3 = 'this is string example , wow this is really string'
+print (str3.replace('is' , 'was' ))
+print (str3.replace('is' , 'was' , 2))
+
+#10)split() => This method returns the string after splitting
+
+str4 = 'This is my work and ,  I am gonna succedd in this'
+
+print (str4.split())  #> By default it is splited by space
+print (str4.split(','))  # This will split by the delimiter command
+
+
+
