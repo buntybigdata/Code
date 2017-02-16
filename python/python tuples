@@ -1,0 +1,21 @@
+####################PYTHON TUPLES###############################
+
+###A tuple is a sequence of immutable Python objects. Tuples are sequences, just like lists. The differences between tuples and lists are, the tuples cannot be changed unlike lists and tuples use parentheses, whereas lists use square brackets.
+
+tuple1 = ('physics' , 'chemistry' , 1991 , 2001)
+tuple2 = (1,2,3,4,5)
+tuple3 = 'a' , 'b' ,'c' 
+tuple4 =()  # A blank touple
+tuple5 = (4, ) # A tuble with only one element.
+
+print (tuple3)
+print ((tuple1[0]))    #will print physics
+print ((tuple2[1:4]))  # will print (2,3,4)
+
+#Updating tuples  => Tuples are immutable
+
+tuple1[2] = 32    #This will not work
+
+#Tuples supports all the basic operation like concatenation and iteration through all elements.
+
+
