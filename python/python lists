@@ -1,0 +1,87 @@
+#############PYTHON LISTS###########################
+
+listss = ['maths' , 'chemistry' , 'Biology' , 'History']
+print (listss)
+print (listss[2])
+
+
+list1 = [1,2,3,4,5,6,7,8]
+print (list1[4])
+
+#Updating list
+
+list2  = ['mango' , 100 , ' Apple' , 200]
+
+list2[2] = 'Banana'
+print (list2)
+#This will print ['mango', 100, 'Banana', 200]
+
+#append
+
+list2.append('Lichi')
+print (list2)
+
+#Output will be : ['mango', 100, 'Banana', 200, 'Lichi']
+
+## Deleting list element
+
+list3 = ['circle' , 'square' , 'Rectangle' , 'Line']
+del list3[3]
+print (list3)
+
+print (len(list3))    # This will give the length of the list
+for i in list3:
+  print (i)
+  
+print (list2 * 4)   # This will print the list2 four times
+
+###concate of list:
+
+print (list2 + list3)
+
+###Built in functions in list:
+
+print (max(list1))  # this will give the maximum from a list
+
+print (min(list1)) # This will give the minimum from a list
+
+#converting tuple into  a list
+
+tuples = (1 ,2 , 'Bunty' , 99 , 'Hadoop')
+listTuple = list(tuples)
+print (listTuple)
+
+###count method in list =>The method count() returns count of how many times obj occurs in list
+
+list = [34,55,33,'ab' , 'df', 'ab',55, 76]
+print (list.count('ab'))
+
+##index() method => The method index() returns the lowest index in list that obj appears.
+
+print(list.index(55))
+
+##insert(index , obj) =>This method will insert the obj at a specified index
+
+listinsert = ['bunty' , 'mahesh' , 'vivek', 'tarun' , 'gaurav']
+listinsert.insert(3, 'Maxwell')
+print (listinsert)
+
+##remove function to delete the obj from the listinsert
+
+listinsert.remove('Maxwell')
+print (listinsert)
+
+##reverse () method to reverse the objects in a list:
+
+listinsert.reverse()
+print (listinsert)
+
+##sort() function sort the objects or elements in a list
+
+listinsert.sort()
+print(listinsert)
+
+
+
+
+
