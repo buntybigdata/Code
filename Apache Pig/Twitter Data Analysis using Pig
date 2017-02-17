@@ -35,11 +35,57 @@ b)Joins, that are performed, needs to be written in Java, which makes it longer 
 
 So, Twitter moved to Apache Pig for analysis. Now, joining data sets, grouping them, sorting them and retrieving data becomes easier and simpler.
 
+Twitter had both semi-structured data like Twitter Apache logs, Twitter search logs, Twitter MySQL query logs, application logs and structured data like tweets, users, block notifications, phones, favorites, saved searches, re-tweets, authentications, SMS usage, user followings, etc which can be easily processed by Apache Pig.
 
+Twitter dumps all its archived data on HDFS. It has two tables i.e. user data and tweets data. User data contains information about the users like username, followers, followings, number of tweets etc. While Tweet data contains tweet, its owner, number of re-tweets, number of likes etc. Now, twitter uses this data to analyse their customer’s behaviors and improve their past experiences.
 
+Problem Statement:-Analyzing how many tweets are stored per user, in the given tweet tables?
 
+Step By step solution is given Below:
 
+STEP 1) First of all twitter imports the twitter tables (i.e. user_table and tweet_table) into the HDFS.We can use sqoop or flume to do this operation.
 
+STEP 2)Then Apache Pig loads the the tables into the Apache Pig Framework using the LOAD command.
+
+STEP 3)Then it joins and groups the tweet tables and user table using COGROUP command.
+
+grunt>  user_group = COGROUP tweet_table by user_id, user_table by id
+
+This results in the inner Bag Data type, which we will discuss later in this blog.
+
+Example of Inner bags produced (refer to the above image) –
+
+(1,{(1,Jay,xyz),(1,Jay,pqr),(1,Jay,lmn)})
+
+(2,{(2,Ellie,abc),(2,Ellie,vxy)})
+
+(3, {(3,Sam,stu)})
+
+STEP 4)Then the tweets are counted according to the users using COUNT command. So, that the total number of tweets per user can be easily calculated.
+
+grunt>COUNT = FOREACH user_group GENERATE COUNT(id)
+
+Example of tuple produced as (id, tweet count) (refer to the above image) –
+
+(1, 3) 
+
+(2, 2)
+
+(3, 1)
+
+STEP 5) At last the result is joined with user table to extract the user name with produced result. 
+
+grunt>JOIN count'id' user_table by id GENERATE count::id , user_table::names , COUNT::count
+
+Example of tuple produced as (id, name, tweet count) (refer to the above image) –
+
+(1, Jay, 3) 
+
+(2, Ellie, 2)
+
+(3, Sam, 1)
+
+STEP 6)Finally, this result is stored back in the HDFS.
 
 
 
