@@ -1,0 +1,45 @@
+Twitter’s data was growing at an accelerating rate (i.e. 10 TB data/day). Thus, Twitter decided to move the archived data to HDFS and adopt Hadoop for extracting the business values out of it. 
+
+Their major aim was to analyse data stored in Hadoop to come up with the following insights on a daily, weekly or monthly basis. 
+
+Counting operations:
+
+How many requests twitter serve in a day?
+What is the average latency of the requests?
+How many searches happens each day on Twitter?
+How many unique queries are received?
+How many unique users come to visit?
+What is the geographic distribution of the users?
+
+Correlating Big Data:
+
+How does usage differ for mobile users?
+Cohort analysis: analyzing data by categorizing user, based on their behavior.
+What goes wrong while site problem occurs?
+Which feature the user use often?
+Search correction and search suggestions.
+
+Research on Big Data and produce better outcomes like:
+
+What can Twitter analysis about users from their tweets?
+Who follows whom and on what basis?
+What is the ratio of the follower to following?
+What is the reputation of the User?
+
+Previously twitter was doing all the above analysis using the mapreduce framework.
+
+But while using MapReduce, they faced some limitations:
+
+a)Analysis needs to be typically done in Java.
+b)Joins, that are performed, needs to be written in Java, which makes it longer and more error-prone.
+
+So, Twitter moved to Apache Pig for analysis. Now, joining data sets, grouping them, sorting them and retrieving data becomes easier and simpler.
+
+
+
+
+
+
+
+
+
