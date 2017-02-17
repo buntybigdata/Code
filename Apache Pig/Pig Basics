@@ -1,0 +1,26 @@
+Apache Pig:- Apache Pig is an important part of the Hadoop Ecosystem.
+
+Why we are using Apache Pig if we have mapreduce to process the data?
+
+The answer of this question is simple and sweet: Approximately 10 lines of pig code is equla to the 200 lines of mapreduce code.
+
+Writing MapReduce jobs in Java is not an easy task for everyone. 
+Thus, Apache Pig emerged as a boon for programmers who were not good with Java or Python.
+Even if someone who knows Java and is good with MapReduce, they will also prefer Apache Pig due to the ease working with Pig. 
+Let us take a look now.
+
+Pig provides many built-in operators to support data operations like joins, filters, ordering, sorting etc. 
+Whereas to perform the same function in MapReduce is a humongous task.
+
+Apache Pig has two main components – the Pig Latin language and the Pig Run-time Environment, in which Pig Latin programs are executed.
+
+Apache Pig is used for analyzing and performing tasks involving ad-hoc processing. Apache Pig is used:
+
+where to use pig?
+
+1)Where we need to process, huge data sets like Web logs, streaming online data, etc.
+2)Where we need Data processing for search platforms (different types of data needs to be processed) like Yahoo uses Pig for 40% of their jobs including news feeds and search engine.
+
+
+
+
